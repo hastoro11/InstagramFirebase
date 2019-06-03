@@ -68,6 +68,9 @@
                                     <constraint firstAttribute="width" constant="140" id="QDe-3w-J95"/>
                                 </constraints>
                                 <state key="normal" image="add_photo"/>
+                                <connections>
+                                    <action selector="addPhotoButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="HvU-rr-5Rr"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -87,6 +90,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="addPhotoButton" destination="6Md-3e-pUs" id="9fM-Ss-W33"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
