@@ -47,26 +47,43 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     @IBAction func signUpButtonTapped() {
-        let email = "dummy5@mail.com"
-        let username = "dummy5"
+        let email = "dummy3@mail.com"
+        let username = "dummy3"
         let password = "123456"
         
-        
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (firUser, error) in
+        let profileImagesRef = Storage.storage().reference().child("profile_images")
+        let fileName = UUID().uuidString
+        guard let uploadData = addPhotoButton.image(for: .normal)?.jpegData(compressionQuality: 0.3) else {return}
+        profileImagesRef.child(fileName).putData(uploadData, metadata: nil) { (metaData, error) in
             if let error = error {
-                print("Error in register user:", error.localizedDescription)
+                print("Error uploading file:", error.localizedDescription)
                 return
             }
-            if let user = firUser?.user {
-                let dictionary = ["username": username, "email": email]
-                Firestore.firestore().collection("users").document(user.uid).setData(dictionary, completion: { (error) in
+            profileImagesRef.child(fileName).downloadURL(completion: { (url, error) in
+                if let error = error {
+                    print("Error in url:", error.localizedDescription)
+                    return
+                }
+                Auth.auth().createUser(withEmail: email, password: password, completion: { (firUser, error) in
                     if let error = error {
-                        print("Error in saving user:", error.localizedDescription)
+                        print("Error inregistering user:", error.localizedDescription)
                         return
                     }
+                    guard let url = url else {return}
+                    if let user = firUser?.user {
+                        let dictionary = ["username": username, "email": email, "profileImageURL": url.absoluteString]
+                        Firestore.firestore().collection("users").document(user.uid).setData(dictionary
+                            , completion: { (error) in
+                                if let error = error {
+                                    print("Error in saving user:", error.localizedDescription)
+                                    return
+                                }
+                                print("user created")
+                        })
+                    }
                 })
-            }
+            })
+            
         }
         
     }
