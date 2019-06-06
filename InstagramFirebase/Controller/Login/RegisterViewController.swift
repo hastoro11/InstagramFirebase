@@ -16,6 +16,13 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
             
         }
     }
+    @IBOutlet weak var alreadyHaveAnAccount: UIButton! {
+        didSet {
+            let attributedText = NSMutableAttributedString(string: "Already have an account? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+            attributedText.append(NSAttributedString(string: "Sign in", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.white]))
+            alreadyHaveAnAccount.setAttributedTitle(attributedText, for: .normal)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +33,10 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func alreadyHaveAnAccountButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

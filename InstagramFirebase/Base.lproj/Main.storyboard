@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UUe-U8-BYS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hSb-7b-Wgn">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Register View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RegisterViewController" customModule="InstagramFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterViewController" id="BYZ-38-t0r" customClass="RegisterViewController" customModule="InstagramFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,13 +72,27 @@
                                     <action selector="addPhotoButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="HvU-rr-5Rr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9g-yc-WXc">
+                                <rect key="frame" x="0.0" y="782" width="414" height="30"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="Don't have an account?">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="alreadyHaveAnAccountButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="gXh-XO-Kkd"/>
+                                    <action selector="dontHaveAccountButtonTapped" destination="hSb-7b-Wgn" eventType="touchUpInside" id="UYN-zb-whI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Md-3e-pUs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3cv-rU-KqZ"/>
                             <constraint firstItem="Tb2-Rj-X9Y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3m4-s4-bYz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="g9g-yc-WXc" secondAttribute="bottom" constant="50" id="BXm-6e-XrO"/>
                             <constraint firstItem="Yhf-9V-Zeh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="CNT-Ut-Q0I"/>
+                            <constraint firstItem="g9g-yc-WXc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="D9n-0A-S6n"/>
                             <constraint firstItem="Tb2-Rj-X9Y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="HGQ-Fm-EH3"/>
+                            <constraint firstItem="g9g-yc-WXc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q26-1G-lM3"/>
                             <constraint firstItem="Yhf-9V-Zeh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Q6i-di-R6e"/>
                             <constraint firstItem="6Md-3e-pUs" firstAttribute="top" secondItem="Tb2-Rj-X9Y" secondAttribute="bottom" constant="10" id="Qeq-6G-PQT"/>
                             <constraint firstItem="QfC-LV-yN4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WSc-5b-p84"/>
@@ -92,16 +106,17 @@
                     </view>
                     <connections>
                         <outlet property="addPhotoButton" destination="6Md-3e-pUs" id="9fM-Ss-W33"/>
+                        <outlet property="alreadyHaveAnAccount" destination="g9g-yc-WXc" id="YSK-Lq-auo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="114" y="-76"/>
+            <point key="canvasLocation" x="1822" y="-147"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Controller-->
         <scene sceneID="NtT-t5-rUp">
             <objects>
-                <tabBarController id="UUe-U8-BYS" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainController" id="UUe-U8-BYS" customClass="MainController" customModule="InstagramFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VeG-PR-u4L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -145,7 +160,14 @@
                             <outlet property="delegate" destination="NuV-dR-tyR" id="nnY-sT-5dG"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="eDb-1H-bm9"/>
+                    <navigationItem key="navigationItem" id="eDb-1H-bm9">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" id="XAU-2c-UGh">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="logoutButtonTapped" destination="NuV-dR-tyR" id="TLO-Z4-dy2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h5F-ys-NaU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -170,11 +192,94 @@
             </objects>
             <point key="canvasLocation" x="911.59420289855075" y="881.91964285714278"/>
         </scene>
+        <!--Login Controller-->
+        <scene sceneID="7rj-k3-CV3">
+            <objects>
+                <viewController storyboardIdentifier="LoginController" id="hSb-7b-Wgn" customClass="LoginController" customModule="InstagramFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="u0K-Ey-JDl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bg" translatesAutoresizingMaskIntoConstraints="NO" id="teL-OO-XUT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pIX-HG-4M2">
+                                <rect key="frame" x="70" y="358" width="274" height="180"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b53-gH-vHP">
+                                        <rect key="frame" x="0.0" y="0.0" width="274" height="53.5"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8IC-wv-ry4">
+                                        <rect key="frame" x="0.0" y="63.5" width="274" height="53"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fg-6g-W4R" customClass="LoginButton" customModule="InstagramFirebase" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="126.5" width="274" height="53.5"/>
+                                        <state key="normal" title="Sign In"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="fU0-r9-aEB"/>
+                                </constraints>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Instagram Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Txo-4z-kGq">
+                                <rect key="frame" x="107" y="64" width="200" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Hwu-tu-HUK"/>
+                                    <constraint firstAttribute="height" constant="85" id="qfx-vb-Xdf"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya8-eO-Ijm">
+                                <rect key="frame" x="0.0" y="782" width="414" height="30"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="Don't have an account?">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="dontHaveAccountButtonTapped" destination="hSb-7b-Wgn" eventType="touchUpInside" id="vjl-wu-hYf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wkU-JT-mEL" firstAttribute="trailing" secondItem="pIX-HG-4M2" secondAttribute="trailing" constant="70" id="3LH-Xg-emm"/>
+                            <constraint firstItem="teL-OO-XUT" firstAttribute="leading" secondItem="u0K-Ey-JDl" secondAttribute="leading" id="7rA-nJ-qDt"/>
+                            <constraint firstItem="pIX-HG-4M2" firstAttribute="centerX" secondItem="u0K-Ey-JDl" secondAttribute="centerX" id="9cn-yL-EHZ"/>
+                            <constraint firstItem="Txo-4z-kGq" firstAttribute="top" secondItem="wkU-JT-mEL" secondAttribute="top" constant="20" id="E6e-uL-g2s"/>
+                            <constraint firstItem="teL-OO-XUT" firstAttribute="top" secondItem="u0K-Ey-JDl" secondAttribute="top" id="LcX-gP-ODh"/>
+                            <constraint firstItem="wkU-JT-mEL" firstAttribute="trailing" secondItem="ya8-eO-Ijm" secondAttribute="trailing" id="P9l-eQ-yBd"/>
+                            <constraint firstItem="teL-OO-XUT" firstAttribute="trailing" secondItem="u0K-Ey-JDl" secondAttribute="trailing" id="QaJ-JQ-dt3"/>
+                            <constraint firstItem="pIX-HG-4M2" firstAttribute="centerY" secondItem="u0K-Ey-JDl" secondAttribute="centerY" id="SSt-rb-VYa"/>
+                            <constraint firstItem="ya8-eO-Ijm" firstAttribute="leading" secondItem="wkU-JT-mEL" secondAttribute="leading" id="fX2-7Y-R9r"/>
+                            <constraint firstItem="pIX-HG-4M2" firstAttribute="leading" secondItem="wkU-JT-mEL" secondAttribute="leading" constant="70" id="l1v-R5-NrY"/>
+                            <constraint firstItem="Txo-4z-kGq" firstAttribute="centerX" secondItem="u0K-Ey-JDl" secondAttribute="centerX" id="sEj-vR-ual"/>
+                            <constraint firstAttribute="bottom" secondItem="teL-OO-XUT" secondAttribute="bottom" id="vUG-az-lkg"/>
+                            <constraint firstItem="wkU-JT-mEL" firstAttribute="bottom" secondItem="ya8-eO-Ijm" secondAttribute="bottom" constant="50" id="we1-se-XjO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wkU-JT-mEL"/>
+                    </view>
+                    <connections>
+                        <outlet property="dontHaveAnAccountButton" destination="ya8-eO-Ijm" id="BOT-6U-czb"/>
+                        <outlet property="emailTextField" destination="b53-gH-vHP" id="t87-bS-i8D"/>
+                        <outlet property="passwordTextField" destination="8IC-wv-ry4" id="rVj-Wi-gGm"/>
+                        <outlet property="signInButton" destination="9fg-6g-W4R" id="Iib-iD-RXd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dtM-EB-bKC" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="987" y="-147"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Bg" width="750" height="1344"/>
         <image name="Instagram Logo" width="227" height="66"/>
         <image name="add_photo" width="190" height="175"/>
+        <image name="gear" width="25" height="25"/>
         <image name="profile_selected" width="22" height="22"/>
         <image name="profile_unselected" width="22" height="22"/>
     </resources>
