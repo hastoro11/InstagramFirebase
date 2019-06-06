@@ -11,11 +11,28 @@ import Firebase
 
 class RegisterViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet weak var addPhotoButton: UIButton! {
+    @IBOutlet weak var emailTextField: UITextField! {
         didSet {
-            
+            emailTextField.addTarget(self, action: #selector(handleTextFields), for: .editingChanged)
         }
     }
+    @IBOutlet weak var usernameTextField: UITextField! {
+        didSet {
+            usernameTextField.addTarget(self, action: #selector(handleTextFields), for: .editingChanged)
+        }
+    }
+    @IBOutlet weak var passwordTextField: UITextField! {
+        didSet {
+            passwordTextField.addTarget(self, action: #selector(handleTextFields), for: .editingChanged)
+        }
+    }
+    @IBOutlet weak var signupButton: UIButton! {
+        didSet {
+            signupButton.isEnabled = false
+            signupButton.backgroundColor = kLOGINBUTTON_COLOR_DISABLED
+        }
+    }
+    @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var alreadyHaveAnAccount: UIButton! {
         didSet {
             let attributedText = NSMutableAttributedString(string: "Already have an account? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
@@ -39,6 +56,18 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func handleTextFields() {
+        if let email = emailTextField.text, !email.isEmpty,
+            let username = usernameTextField.text, !username.isEmpty,
+            let password = passwordTextField.text, !password.isEmpty {
+            signupButton.isEnabled = true
+            signupButton.backgroundColor = kLOGINBUTTON_COLOR
+        } else {
+            signupButton.isEnabled = false
+            signupButton.backgroundColor = kLOGINBUTTON_COLOR_DISABLED
+        }
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             print("original")
@@ -58,9 +87,9 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     @IBAction func signUpButtonTapped() {
-        let email = "dummy3@mail.com"
-        let username = "dummy3"
-        let password = "123456"
+        guard let email = emailTextField.text else {return}
+        guard let username = usernameTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
         
         let profileImagesRef = Storage.storage().reference().child("profile_images")
         let fileName = UUID().uuidString
@@ -89,7 +118,8 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                                     print("Error in saving user:", error.localizedDescription)
                                     return
                                 }
-                                print("user created")
+                                let mainController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+                                self.view.window?.rootViewController = mainController
                         })
                     }
                 })

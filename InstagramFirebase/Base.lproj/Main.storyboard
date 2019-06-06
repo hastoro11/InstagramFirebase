@@ -107,6 +107,10 @@
                     <connections>
                         <outlet property="addPhotoButton" destination="6Md-3e-pUs" id="9fM-Ss-W33"/>
                         <outlet property="alreadyHaveAnAccount" destination="g9g-yc-WXc" id="YSK-Lq-auo"/>
+                        <outlet property="emailTextField" destination="rBd-kg-zJn" id="38q-tn-KEe"/>
+                        <outlet property="passwordTextField" destination="P5K-Mc-LEl" id="CCc-CT-83m"/>
+                        <outlet property="signupButton" destination="hq5-KG-ktQ" id="vlD-8t-JZ9"/>
+                        <outlet property="usernameTextField" destination="0eP-ll-mvy" id="kLQ-hu-Rfp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -221,6 +225,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fg-6g-W4R" customClass="LoginButton" customModule="InstagramFirebase" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="126.5" width="274" height="53.5"/>
                                         <state key="normal" title="Sign In"/>
+                                        <connections>
+                                            <action selector="signinButtonTapped" destination="hSb-7b-Wgn" eventType="touchUpInside" id="cJ6-hZ-9Wq"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
