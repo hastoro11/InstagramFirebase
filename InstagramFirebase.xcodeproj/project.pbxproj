@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1F9F4E3134336E6831ACC5B8 /* Pods_InstagramFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E423C9402E4B3E6FCC7CEDF0 /* Pods_InstagramFirebase.framework */; };
+		8C1074F322A81C2300A4BF7B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1074F222A81C2300A4BF7B /* ProfileViewController.swift */; };
+		8C1074FE22A8F25200A4BF7B /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1074FC22A8F25200A4BF7B /* UserProfileHeader.swift */; };
+		8C1074FF22A8F25200A4BF7B /* UserProfileHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C1074FD22A8F25200A4BF7B /* UserProfileHeader.xib */; };
+		8C10750222A8F69100A4BF7B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10750122A8F69100A4BF7B /* User.swift */; };
 		8CCF054022A535DD00FA3E22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */; };
 		8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */; };
 		8CCF054522A535DD00FA3E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CCF054322A535DD00FA3E22 /* Main.storyboard */; };
@@ -20,6 +24,10 @@
 
 /* Begin PBXFileReference section */
 		076CD8FE0EB4187832681C07 /* Pods-InstagramFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramFirebase.release.xcconfig"; path = "Target Support Files/Pods-InstagramFirebase/Pods-InstagramFirebase.release.xcconfig"; sourceTree = "<group>"; };
+		8C1074F222A81C2300A4BF7B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8C1074FC22A8F25200A4BF7B /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		8C1074FD22A8F25200A4BF7B /* UserProfileHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileHeader.xib; sourceTree = "<group>"; };
+		8C10750122A8F69100A4BF7B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8CCF053C22A535DD00FA3E22 /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +54,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C1074F422A81C2700A4BF7B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8C1074F222A81C2300A4BF7B /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		8C1074F522A8F13D00A4BF7B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8C1074FC22A8F25200A4BF7B /* UserProfileHeader.swift */,
+				8C1074FD22A8F25200A4BF7B /* UserProfileHeader.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8C10750022A8F68400A4BF7B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C10750122A8F69100A4BF7B /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8CCF053322A535DD00FA3E22 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +102,8 @@
 			children = (
 				8CCF055822A5643100FA3E22 /* Constants */,
 				8CCF055522A563CF00FA3E22 /* CustomViews */,
+				8C10750022A8F68400A4BF7B /* Model */,
+				8C1074F522A8F13D00A4BF7B /* Views */,
 				8CCF055322A55B5D00FA3E22 /* Controller */,
 				8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */,
 				8CCF054322A535DD00FA3E22 /* Main.storyboard */,
@@ -83,6 +118,7 @@
 		8CCF055322A55B5D00FA3E22 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8C1074F422A81C2700A4BF7B /* Profile */,
 				8CCF055422A55B6700FA3E22 /* Login */,
 			);
 			path = Controller;
@@ -192,6 +228,7 @@
 				8CCF054A22A535DE00FA3E22 /* LaunchScreen.storyboard in Resources */,
 				8CCF055222A5360400FA3E22 /* GoogleService-Info.plist in Resources */,
 				8CCF054722A535DE00FA3E22 /* Assets.xcassets in Resources */,
+				8C1074FF22A8F25200A4BF7B /* UserProfileHeader.xib in Resources */,
 				8CCF054522A535DD00FA3E22 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,8 +303,11 @@
 			files = (
 				8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */,
 				8CCF055722A563E200FA3E22 /* LoginButton.swift in Sources */,
+				8C1074F322A81C2300A4BF7B /* ProfileViewController.swift in Sources */,
+				8C1074FE22A8F25200A4BF7B /* UserProfileHeader.swift in Sources */,
 				8CCF054022A535DD00FA3E22 /* AppDelegate.swift in Sources */,
 				8CCF055A22A5644300FA3E22 /* Constants.swift in Sources */,
+				8C10750222A8F69100A4BF7B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
