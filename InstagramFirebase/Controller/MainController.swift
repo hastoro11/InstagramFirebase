@@ -12,6 +12,16 @@ class MainController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+    }
+    
+    fileprivate func setupViews() {
         
+        
+        //profile
+        let profileController = ProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        profileController.tabBarItem.selectedImage = UIImage(named: "profile_selected")
+        profileController.tabBarItem.image = UIImage(named: "profile_selected")
+        viewControllers = [UINavigationController(rootViewController: profileController)]
     }
 }
