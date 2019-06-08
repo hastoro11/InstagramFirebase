@@ -15,12 +15,13 @@ private let reuseHeaderIdentifier = "header"
 class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var images = [UIImage]()
+    var selectedIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
+        collectionView.register(PhotoSelectorCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
         setupBarButtons()
         fetchPhotos()
     }
@@ -43,6 +44,9 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
                 if let image = image {
                     self.images.append(image)
                 }
+                if self.selectedIndex == nil {
+                    self.selectedIndex = count
+                }
                 
                 if count == result.count - 1 {
                     self.collectionView.reloadData()
@@ -62,8 +66,10 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath)
-        header.backgroundColor = .orange
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as! PhotoSelectorCell
+        if let selectedIndex = selectedIndex {
+            header.photoImageView.image = images[selectedIndex]
+        }
         
         return header
     }
@@ -99,5 +105,10 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.item
+        collectionView.reloadData()
     }
 }

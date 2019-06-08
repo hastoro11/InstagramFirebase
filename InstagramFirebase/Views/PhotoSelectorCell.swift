@@ -25,7 +25,6 @@ class PhotoSelectorCell: UICollectionViewCell {
         photoImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         photoImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         photoImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        print(subviews.count)
     }
     
     required init?(coder aDecoder: NSCoder) {
