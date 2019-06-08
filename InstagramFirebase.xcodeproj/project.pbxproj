@@ -19,6 +19,7 @@
 		8C10750D22ABA85700A4BF7B /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10750C22ABA85700A4BF7B /* SharePhotoController.swift */; };
 		8C10750F22ABED4200A4BF7B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10750E22ABED4200A4BF7B /* Post.swift */; };
 		8C10751122ABEE9900A4BF7B /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751022ABEE9900A4BF7B /* UserProfileCell.swift */; };
+		8C10751422ABFD0F00A4BF7B /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751322ABFD0F00A4BF7B /* CustomImageView.swift */; };
 		8CCF054022A535DD00FA3E22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */; };
 		8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */; };
 		8CCF054522A535DD00FA3E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CCF054322A535DD00FA3E22 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		8C10750C22ABA85700A4BF7B /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		8C10750E22ABED4200A4BF7B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		8C10751022ABEE9900A4BF7B /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
+		8C10751322ABFD0F00A4BF7B /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		8CCF053C22A535DD00FA3E22 /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,13 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		8C10751222ABFCFC00A4BF7B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8CCF053322A535DD00FA3E22 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +135,7 @@
 		8CCF053E22A535DD00FA3E22 /* InstagramFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				8C10751222ABFCFC00A4BF7B /* Extensions */,
 				8CCF055822A5643100FA3E22 /* Constants */,
 				8CCF055522A563CF00FA3E22 /* CustomViews */,
 				8C10750022A8F68400A4BF7B /* Model */,
@@ -164,6 +174,7 @@
 		8CCF055522A563CF00FA3E22 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				8C10751322ABFD0F00A4BF7B /* CustomImageView.swift */,
 				8CCF055622A563E200FA3E22 /* LoginButton.swift */,
 			);
 			path = CustomViews;
@@ -337,6 +348,7 @@
 				8CCF055722A563E200FA3E22 /* LoginButton.swift in Sources */,
 				8C10750F22ABED4200A4BF7B /* Post.swift in Sources */,
 				8C1074F322A81C2300A4BF7B /* ProfileViewController.swift in Sources */,
+				8C10751422ABFD0F00A4BF7B /* CustomImageView.swift in Sources */,
 				8C1074FE22A8F25200A4BF7B /* UserProfileHeader.swift in Sources */,
 				8C10750D22ABA85700A4BF7B /* SharePhotoController.swift in Sources */,
 				8C10750622A96C6D00A4BF7B /* MainController.swift in Sources */,

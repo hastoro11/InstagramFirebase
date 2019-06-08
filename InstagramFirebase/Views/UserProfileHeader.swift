@@ -11,7 +11,7 @@ import UIKit
 class UserProfileHeader: UICollectionReusableView {
     
     //MARK: - outlets
-    @IBOutlet weak var profileImageView: UIImageView! {
+    @IBOutlet weak var profileImageView: CustomImageView! {
         didSet {
             profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
             profileImageView.layer.masksToBounds = true
@@ -80,20 +80,8 @@ class UserProfileHeader: UICollectionReusableView {
     }
     
     fileprivate func loadProfileImage() {
-        guard let user = user, let url = URL(string: user.profileImageURL) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print("Error loading profile image:", error.localizedDescription)
-                return
-            }
-            if let response = response as? HTTPURLResponse, !(200...299).contains(response.statusCode) {
-                print("Bad http response:", response.statusCode)
-                return
-            }
-            guard let data = data, let image = UIImage(data: data) else {return}
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-        }.resume()
+        guard let user = user else { return }
+        profileImageView.identifier = user.profileImageURL
+        profileImageView.loadImage(from: user.profileImageURL)
     }
 }

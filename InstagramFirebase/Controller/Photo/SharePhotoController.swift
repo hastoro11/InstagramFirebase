@@ -67,6 +67,10 @@ class SharePhotoController: UIViewController {
                         print("Error saving post:", error.localizedDescription)
                         return
                     }
+                    guard let mainController = self.view.window?.rootViewController as? MainController else {return}
+                    guard let navController = mainController.viewControllers?[4] as? UINavigationController else {return}
+                    guard let profileController = navController.topViewController as? ProfileViewController else {return}
+                    profileController.fetchPosts()
                     self.dismiss(animated: true, completion: nil)
                 })
                 

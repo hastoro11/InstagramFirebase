@@ -10,14 +10,11 @@ import UIKit
 
 class UserProfileCell: UICollectionViewCell {
     
-    var post: Post? {
-        didSet {
-            loadImage()
-        }
-    }
+    var post: Post?
+    var identifier: String?
     
-    var imageView: UIImageView = {
-        let iv = UIImageView()
+    var imageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
@@ -37,14 +34,13 @@ class UserProfileCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
+    func configure() {
+        loadImage()
+    }
+    
     fileprivate func loadImage() {
-        guard let post = post, let url = URL(string: post.imageURL) else {return}
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                DispatchQueue.main.async {
-                    self.imageView.image = UIImage(data: data)
-                }
-            }
-        }.resume()
+        guard let post = post else {return}
+        imageView.identifier = post.imageURL
+        imageView.loadImage(from: post.imageURL)        
     }
 }

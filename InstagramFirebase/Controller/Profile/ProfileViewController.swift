@@ -52,6 +52,9 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserProfileCell
         cell.post = posts[indexPath.item]
+//        cell.identifier = posts[indexPath.item].imageURL
+        
+        cell.configure()
         // Configure the cell
         
         return cell
@@ -99,9 +102,10 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         
     }
     
-    fileprivate func fetchPosts() {
+    func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        let ref = Firestore.firestore().collection("posts").document(uid).collection("user_posts")
+        posts = []
+        let ref = Firestore.firestore().collection("posts").document(uid).collection("user_posts").order(by: "creationDate", descending: true)
         ref.getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error fetching posts:", error.localizedDescription)
