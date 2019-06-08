@@ -15,6 +15,7 @@ private let reuseHeaderIdentifier = "header"
 class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var images = [UIImage]()
+    var assets = [PHAsset]()
     var selectedIndex: Int?
     
     override func viewDidLoad() {
@@ -36,23 +37,29 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         options.sortDescriptors = [sortDescriptor]
         let result: PHFetchResult<PHAsset> = PHAsset.fetchAssets(with: .image, options: options)
-        let size = CGSize(width: 350, height: 350)
-        let requestImageOptions = PHImageRequestOptions()
-        requestImageOptions.isSynchronous = true
-        result.enumerateObjects { (asset, count, stop) in
-            PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestImageOptions, resultHandler: { (image, info) in
-                if let image = image {
-                    self.images.append(image)
-                }
-                if self.selectedIndex == nil {
-                    self.selectedIndex = count
-                }
-                
-                if count == result.count - 1 {
-                    self.collectionView.reloadData()
-                }
-            })
+        let size = CGSize(width: 200, height: 200)
+        DispatchQueue.global(qos: .background).async {
+            let requestImageOptions = PHImageRequestOptions()
+            requestImageOptions.isSynchronous = true
+            result.enumerateObjects { (asset, count, stop) in
+                PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestImageOptions, resultHandler: { (image, info) in
+                    if let image = image {
+                        self.images.append(image)
+                        self.assets.append(asset)
+                    }
+                    if self.selectedIndex == nil {
+                        self.selectedIndex = count
+                    }
+                    
+                    if count == result.count - 1 {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                })
+            }
         }
+        
     }
     
     @objc func cancel() {
@@ -68,7 +75,11 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as! PhotoSelectorCell
         if let selectedIndex = selectedIndex {
-            header.photoImageView.image = images[selectedIndex]
+            PHImageManager.default().requestImage(for: assets[selectedIndex], targetSize: CGSize(width: 600, height: 600), contentMode: .default, options: nil) { (image, info) in
+                if let image = image {
+                    header.photoImageView.image = image
+                }
+            }
         }
         
         return header
