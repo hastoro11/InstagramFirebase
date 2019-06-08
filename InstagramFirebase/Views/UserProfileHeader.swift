@@ -80,8 +80,7 @@ class UserProfileHeader: UICollectionReusableView {
     }
     
     fileprivate func loadProfileImage() {
-        guard let user = user else { return }
-        profileImageView.identifier = user.profileImageURL
+        guard let user = user else { return }        
         profileImageView.loadImage(from: user.profileImageURL)
     }
 }
