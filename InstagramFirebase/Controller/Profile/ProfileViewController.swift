@@ -16,14 +16,16 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     
     //MARK: - vars
     var user: User?
+    var posts = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UserProfileCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(UINib(nibName: "UserProfileHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
         fetchUser()
+        fetchPosts()
     }
     
     @IBAction func logoutButtonTapped() {
@@ -44,14 +46,14 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     //MARK: - CollectionView
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 7
+        return posts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserProfileCell
+        cell.post = posts[indexPath.item]
         // Configure the cell
-        cell.backgroundColor = .orange
+        
         return cell
     }
     
@@ -95,5 +97,21 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
             self.collectionView.reloadData()
         }
         
+    }
+    
+    fileprivate func fetchPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let ref = Firestore.firestore().collection("posts").document(uid).collection("user_posts")
+        ref.getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching posts:", error.localizedDescription)
+                return
+            }
+            guard let postsArray = snapshot.map({$0.documents.map({$0.data()})}) else {return}
+            postsArray.forEach({ (postDoc) in
+                self.posts.append(Post(from: postDoc))
+            })
+            self.collectionView.reloadData()
+        }
     }
 }

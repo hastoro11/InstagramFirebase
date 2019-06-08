@@ -70,7 +70,12 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
     @objc func sharePhoto() {
         let sharePhotoController = SharePhotoController()
         if let selectedIndex = selectedIndex {
-            sharePhotoController.selectedImage = images[selectedIndex]
+            let asset = assets[selectedIndex]
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true
+            PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 600, height: 600), contentMode: .default, options: options) { (image, info) in
+                sharePhotoController.selectedImage = image
+            }
         }
         
         navigationController?.pushViewController(sharePhotoController, animated: true)
