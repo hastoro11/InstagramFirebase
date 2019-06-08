@@ -30,6 +30,10 @@ class UserProfileCell: UICollectionViewCell {
         imageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
     }
     
+    override func prepareForReuse() {
+        imageView.image = UIImage()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -40,7 +44,6 @@ class UserProfileCell: UICollectionViewCell {
     
     fileprivate func loadImage() {
         guard let post = post else {return}
-        imageView.identifier = post.imageURL
         imageView.loadImage(from: post.imageURL)        
     }
 }

@@ -16,9 +16,7 @@ class CustomImageView: UIImageView {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 DispatchQueue.main.async {
-                    if self.identifier == url.absoluteString {
-                        self.image = UIImage(data: data)
-                    }
+                    self.image = UIImage(data: data)                    
                 }
             }
             }.resume()
