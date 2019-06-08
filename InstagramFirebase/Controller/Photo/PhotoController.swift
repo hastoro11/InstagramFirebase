@@ -29,7 +29,8 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
     
     fileprivate func setupBarButtons() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
-        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(sharePhoto))
+        navigationController?.navigationBar.tintColor = .black
     }
     
     fileprivate func fetchPhotos() {
@@ -64,6 +65,15 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
     
     @objc func cancel() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func sharePhoto() {
+        let sharePhotoController = SharePhotoController()
+        if let selectedIndex = selectedIndex {
+            sharePhotoController.selectedImage = images[selectedIndex]
+        }
+        
+        navigationController?.pushViewController(sharePhotoController, animated: true)
     }
     
     //MARK: - CollectionView
