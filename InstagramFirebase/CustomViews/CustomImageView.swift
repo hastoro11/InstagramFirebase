@@ -11,14 +11,14 @@ import UIKit
 class CustomImageView: UIImageView {
     var identifier: String?
     
-    func loadImage(from imageURL: String) {
-        guard let url = URL(string: imageURL) else {return}
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                DispatchQueue.main.async {
-                    self.image = UIImage(data: data)                    
-                }
-            }
-            }.resume()
-    }
+//    func loadImage(from imageURL: String) {
+//        guard let url = URL(string: imageURL) else {return}
+//        URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            if let data = data {
+//                DispatchQueue.main.async {
+//                    self.image = UIImage(data: data)
+//                }
+//            }
+//            }.resume()
+//    }
 }

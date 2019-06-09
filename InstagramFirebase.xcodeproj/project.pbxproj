@@ -20,6 +20,9 @@
 		8C10750F22ABED4200A4BF7B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10750E22ABED4200A4BF7B /* Post.swift */; };
 		8C10751122ABEE9900A4BF7B /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751022ABEE9900A4BF7B /* UserProfileCell.swift */; };
 		8C10751422ABFD0F00A4BF7B /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751322ABFD0F00A4BF7B /* CustomImageView.swift */; };
+		8C10751622ACE8AD00A4BF7B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751522ACE8AD00A4BF7B /* UIImageView+Extension.swift */; };
+		8C10751922AD14DF00A4BF7B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751822AD14DF00A4BF7B /* HomeController.swift */; };
+		8C10751B22AD161A00A4BF7B /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751A22AD161A00A4BF7B /* HomeCell.swift */; };
 		8CCF054022A535DD00FA3E22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */; };
 		8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */; };
 		8CCF054522A535DD00FA3E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CCF054322A535DD00FA3E22 /* Main.storyboard */; };
@@ -44,6 +47,9 @@
 		8C10750E22ABED4200A4BF7B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		8C10751022ABEE9900A4BF7B /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
 		8C10751322ABFD0F00A4BF7B /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		8C10751522ACE8AD00A4BF7B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		8C10751822AD14DF00A4BF7B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		8C10751A22AD161A00A4BF7B /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		8CCF053C22A535DD00FA3E22 /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +91,7 @@
 				8C1074FD22A8F25200A4BF7B /* UserProfileHeader.xib */,
 				8C10750A22AB8B3F00A4BF7B /* PhotoSelectorCell.swift */,
 				8C10751022ABEE9900A4BF7B /* UserProfileCell.swift */,
+				8C10751A22AD161A00A4BF7B /* HomeCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -110,8 +117,17 @@
 		8C10751222ABFCFC00A4BF7B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8C10751522ACE8AD00A4BF7B /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8C10751722AD14C900A4BF7B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8C10751822AD14DF00A4BF7B /* HomeController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		8CCF053322A535DD00FA3E22 = {
@@ -156,6 +172,7 @@
 			children = (
 				8C10750522A96C6D00A4BF7B /* MainController.swift */,
 				8CCF055422A55B6700FA3E22 /* Login */,
+				8C10751722AD14C900A4BF7B /* Home */,
 				8C10750722AAC71800A4BF7B /* Photo */,
 				8C1074F422A81C2700A4BF7B /* Profile */,
 			);
@@ -349,12 +366,15 @@
 				8C10750F22ABED4200A4BF7B /* Post.swift in Sources */,
 				8C1074F322A81C2300A4BF7B /* ProfileViewController.swift in Sources */,
 				8C10751422ABFD0F00A4BF7B /* CustomImageView.swift in Sources */,
+				8C10751922AD14DF00A4BF7B /* HomeController.swift in Sources */,
 				8C1074FE22A8F25200A4BF7B /* UserProfileHeader.swift in Sources */,
 				8C10750D22ABA85700A4BF7B /* SharePhotoController.swift in Sources */,
+				8C10751622ACE8AD00A4BF7B /* UIImageView+Extension.swift in Sources */,
 				8C10750622A96C6D00A4BF7B /* MainController.swift in Sources */,
 				8CCF054022A535DD00FA3E22 /* AppDelegate.swift in Sources */,
 				8C10750422A968A200A4BF7B /* LoginController.swift in Sources */,
 				8CCF055A22A5644300FA3E22 /* Constants.swift in Sources */,
+				8C10751B22AD161A00A4BF7B /* HomeCell.swift in Sources */,
 				8C10750222A8F69100A4BF7B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

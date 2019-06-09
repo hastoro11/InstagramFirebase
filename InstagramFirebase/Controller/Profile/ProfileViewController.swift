@@ -51,10 +51,9 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserProfileCell
-        cell.post = posts[indexPath.item]
-//        cell.identifier = posts[indexPath.item].imageURL
-        
+        cell.post = posts[indexPath.item]                
         cell.configure()
+        cell.identifier = posts[indexPath.item].imageURL
         // Configure the cell
         
         return cell
@@ -117,16 +116,5 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
             })
             self.collectionView.reloadData()
         }
-//        ref.getDocuments { (snapshot, error) in
-//            if let error = error {
-//                print("Error fetching posts:", error.localizedDescription)
-//                return
-//            }
-//            guard let postsArray = snapshot.map({$0.documents.map({$0.data()})}) else {return}
-//            postsArray.forEach({ (postDoc) in
-//                self.posts.append(Post(from: postDoc))
-//            })
-//            self.collectionView.reloadData()
-//        }
     }
 }

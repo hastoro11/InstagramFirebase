@@ -11,7 +11,7 @@ import UIKit
 class UserProfileHeader: UICollectionReusableView {
     
     //MARK: - outlets
-    @IBOutlet weak var profileImageView: CustomImageView! {
+    @IBOutlet weak var profileImageView: UIImageView! {
         didSet {
             profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
             profileImageView.layer.masksToBounds = true

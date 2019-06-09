@@ -1,28 +1,34 @@
 //
-//  UserProfileCell.swift
+//  HomeCell.swift
 //  InstagramFirebase
 //
-//  Created by Gabor Sornyei on 2019. 06. 08..
+//  Created by Gabor Sornyei on 2019. 06. 09..
 //  Copyright © 2019. Gabor Sornyei. All rights reserved.
 //
 
 import UIKit
 
-class UserProfileCell: UICollectionViewCell {
+class HomeCell: UICollectionViewCell {
     
-    var post: Post?
-    var identifier: String?
+    var post: Post? {
+        didSet {
+            guard let url = post?.imageURL else {return}
+            imageView.loadImage(from: url)
+        }
+    }
     
     var imageView: UIImageView = {
         let iv = UIImageView()
-        iv.clipsToBounds = true
-        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.backgroundColor = .gray
+        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         addSubview(imageView)
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
@@ -31,17 +37,6 @@ class UserProfileCell: UICollectionViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    func configure() {
-        loadImage()
-    }
-    
-    fileprivate func loadImage() {
-        guard let post = post else {return}
-        if identifier == post.imageURL || identifier == nil {
-            imageView.loadImage(from: post.imageURL)
-        }
+        fatalError("init(coder:) has not been implemented")
     }
 }

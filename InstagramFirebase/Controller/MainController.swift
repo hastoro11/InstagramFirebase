@@ -28,7 +28,7 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
     
     fileprivate func setupViews() {
         //home
-        let homeController = UICollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let homeController = HomeController(collectionViewLayout: UICollectionViewFlowLayout())
         homeController.tabBarItem.image = UIImage(named: "home_unselected")
         homeController.tabBarItem.selectedImage = UIImage(named: "home_selected")
         
