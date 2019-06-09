@@ -79,12 +79,13 @@ class HomePostCell: UICollectionViewCell {
     
     var displayLabel: UILabel = {
         let lbl = UILabel()
-        let attributedText = NSMutableAttributedString(string: "username", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "username", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)])
         attributedText.append(NSAttributedString(string: " This text is just a dummy text which is hopefully wraps onto the next line", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
-        attributedText.append(NSAttributedString(string: "\n1 day before", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
+        attributedText.append(NSAttributedString(string: "1 day before", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
         lbl.attributedText = attributedText
         lbl.numberOfLines = 0
-        lbl.translatesAutoresizingMaskIntoConstraints = false        
+        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     

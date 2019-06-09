@@ -26,6 +26,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         self.collectionView.register(UINib(nibName: "UserProfileHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
         fetchUser()
         fetchPosts()
+//        addListener()
     }
     
     @IBAction func logoutButtonTapped() {
@@ -51,7 +52,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserProfileCell
-        cell.post = posts[indexPath.item]                
+        cell.post = posts[indexPath.item]
         cell.configure()
         cell.identifier = posts[indexPath.item].imageURL
         // Configure the cell
@@ -101,7 +102,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         
     }
     
-    func fetchPosts() {
+    func addListener() {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         let ref = Firestore.firestore().collection("posts").document(uid).collection("user_posts").order(by: "creationDate", descending: true)
         ref.addSnapshotListener { (snapshot, error) in
@@ -109,12 +110,43 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
                 print("Error in fetching posts:", error.localizedDescription)
                 return
             }
-            self.posts = []
-            guard let postsArray = snapshot.map({$0.documents.map({$0.data()})}) else {return}
-            postsArray.forEach({ (postDoc) in
-                self.posts.append(Post(from: postDoc))
-            })
+            guard let postsArray = snapshot.map({$0.documents.map({$0.data()})}), postsArray.count > 0 else {return}
+
+            let newPostDictionary = postsArray[0]
+            let newPost = Post(from: newPostDictionary)
+            self.posts.insert(newPost, at: 0)
+            self.collectionView.insertItems(at: [IndexPath(item: 0, section: 0)])
+
             self.collectionView.reloadData()
+        }
+    }
+    
+    func fetchPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let ref = Firestore.firestore().collection("posts").document(uid).collection("user_posts").order(by: "creationDate", descending: false)
+        ref.addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error in fetching posts:", error.localizedDescription)
+                return
+            }
+            guard let postsArray = snapshot.map({$0.documents.map({$0.data()})}), postsArray.count > 0 else {return}
+            
+            if self.posts.count == 0 {
+                postsArray.forEach({ (postDoc) in
+                    self.posts.append(Post(from: postDoc))
+                })
+                self.posts.sort(by: { (lhp, rhp) -> Bool in
+                    lhp.creationDate < rhp.creationDate
+                })
+                self.collectionView.reloadData()
+                return
+            }
+            
+            if postsArray.count > self.posts.count {
+                let newPostDict = postsArray[postsArray.count - 1]
+                self.posts.append(Post(from: newPostDict))
+                self.collectionView.insertItems(at: [IndexPath(item: self.posts.count - 1, section: 0)])
+            }
         }
     }
 }

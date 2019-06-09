@@ -42,7 +42,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func fetchPosts() {
         guard let user = Auth.auth().currentUser else {return}
         let postsRef = Firestore.firestore().collection("posts").document(user.uid).collection("user_posts")
-        postsRef.getDocuments { (snapshot, error) in
+        postsRef.order(by: "creationDate", descending: true).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error fetching posts:", error.localizedDescription)
                 return
