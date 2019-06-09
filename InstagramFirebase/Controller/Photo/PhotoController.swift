@@ -136,5 +136,7 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndex = indexPath.item
         collectionView.reloadData()
+        let firstItem = IndexPath(item: 0, section: 0)
+        collectionView.scrollToItem(at: firstItem, at: .bottom, animated: true)
     }
 }
