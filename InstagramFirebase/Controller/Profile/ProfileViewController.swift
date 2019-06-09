@@ -104,18 +104,29 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     
     func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        posts = []
         let ref = Firestore.firestore().collection("posts").document(uid).collection("user_posts").order(by: "creationDate", descending: true)
-        ref.getDocuments { (snapshot, error) in
+        ref.addSnapshotListener { (snapshot, error) in
             if let error = error {
-                print("Error fetching posts:", error.localizedDescription)
+                print("Error in fetching posts:", error.localizedDescription)
                 return
             }
+            self.posts = []
             guard let postsArray = snapshot.map({$0.documents.map({$0.data()})}) else {return}
             postsArray.forEach({ (postDoc) in
                 self.posts.append(Post(from: postDoc))
             })
             self.collectionView.reloadData()
         }
+//        ref.getDocuments { (snapshot, error) in
+//            if let error = error {
+//                print("Error fetching posts:", error.localizedDescription)
+//                return
+//            }
+//            guard let postsArray = snapshot.map({$0.documents.map({$0.data()})}) else {return}
+//            postsArray.forEach({ (postDoc) in
+//                self.posts.append(Post(from: postDoc))
+//            })
+//            self.collectionView.reloadData()
+//        }
     }
 }
