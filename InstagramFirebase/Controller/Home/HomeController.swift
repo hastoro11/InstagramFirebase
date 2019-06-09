@@ -15,7 +15,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
-        collectionView.register(HomeCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        navigationItem.titleView = UIImageView(image: UIImage(named: "logo2"))
         fetchPosts()
     }
     
@@ -25,11 +26,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.width)
+        var height = view.frame.width
+        height += 8 + 40 + 8
+        height += 50
+        height += 80
+        return CGSize(width: view.frame.width, height: height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomeCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomePostCell
         cell.post = posts[indexPath.item]
         return cell
     }
