@@ -12,8 +12,12 @@ class HomePostCell: UICollectionViewCell {
     
     var post: Post? {
         didSet {
-            guard let url = post?.imageURL else {return}
-            imageView.loadImage(from: url)
+            guard let post = post else {return}
+            imageView.loadImage(from: post.imageURL)
+            usernameLabel.text = post.user.username
+            profileImageView.loadImage(from: post.user.profileImageURL)
+            
+            configureDisplayLabel()
         }
     }
     
@@ -79,11 +83,6 @@ class HomePostCell: UICollectionViewCell {
     
     var displayLabel: UILabel = {
         let lbl = UILabel()
-        let attributedText = NSMutableAttributedString(string: "username", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)])
-        attributedText.append(NSAttributedString(string: " This text is just a dummy text which is hopefully wraps onto the next line", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
-        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
-        attributedText.append(NSAttributedString(string: "1 day before", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
-        lbl.attributedText = attributedText
         lbl.numberOfLines = 0
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -147,6 +146,15 @@ class HomePostCell: UICollectionViewCell {
         favButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
         favButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         favButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    fileprivate func configureDisplayLabel() {
+        guard let post = post else {return}
+        let attributedText = NSMutableAttributedString(string: post.user.username, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)])
+        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
+        attributedText.append(NSAttributedString(string: "1 day before", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        displayLabel.attributedText = attributedText
     }
     
     required init?(coder aDecoder: NSCoder) {

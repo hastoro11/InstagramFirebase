@@ -60,7 +60,7 @@ class SharePhotoController: UIViewController {
                 }
                 guard let url = url else {return}
                 let newPostRef = Firestore.firestore().collection("posts").document(currentUser.uid).collection("user_posts").document()
-                let dictionary = ["cpation": caption, "imageURL": url.absoluteString, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+                let dictionary = ["caption": caption, "imageURL": url.absoluteString, "creationDate": Date().timeIntervalSince1970] as [String: Any]
                 
                 newPostRef.setData(dictionary, completion: { (error) in
                     if let error = error {

@@ -39,10 +39,7 @@ class UserProfileCell: UICollectionViewCell {
     }
     
     func configure() {
-        guard let post = post else {return}
-//        if identifier == post.imageURL {
-            loadImage()
-//        }
+        loadImage()
     }
     
     fileprivate func loadImage() {
