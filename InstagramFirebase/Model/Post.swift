@@ -11,13 +11,11 @@ import Foundation
 struct Post {
     var imageURL: String
     var creationDate: Date
+    var user: User
     
-    init(from dictionary: [String: Any]) {
-        if let imageURL = dictionary["imageURL"] as? String {
-            self.imageURL = imageURL
-        } else {
-            self.imageURL = ""
-        }
+    init(user: User, from dictionary: [String: Any]) {
+        self.user = user
+        self.imageURL = dictionary["imageURL"] as? String ?? ""
         if let timeStamp = dictionary["creationDate"] as? Double {
             self.creationDate = Date(timeIntervalSince1970: timeStamp)
         } else {

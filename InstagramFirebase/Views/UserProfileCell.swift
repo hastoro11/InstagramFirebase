@@ -34,14 +34,19 @@ class UserProfileCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
+    override func prepareForReuse() {
+        imageView.image = UIImage()
+    }
+    
     func configure() {
-        loadImage()
+        guard let post = post else {return}
+//        if identifier == post.imageURL {
+            loadImage()
+//        }
     }
     
     fileprivate func loadImage() {
         guard let post = post else {return}
-        if identifier == post.imageURL || identifier == nil {
-            imageView.loadImage(from: post.imageURL)
-        }
+        imageView.loadImage(from: post.imageURL)
     }
 }

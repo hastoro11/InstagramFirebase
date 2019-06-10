@@ -40,18 +40,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     fileprivate func fetchPosts() {
-        guard let user = Auth.auth().currentUser else {return}
-        let postsRef = Firestore.firestore().collection("posts").document(user.uid).collection("user_posts")
-        postsRef.order(by: "creationDate", descending: true).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error fetching posts:", error.localizedDescription)
-                return
-            }
-            guard let postsArray = snapshot.map({$0.documents.map({$0.data()})}) else {return}
-            postsArray.forEach({ (dictionary) in
-                self.posts.append(Post(from: dictionary))
+        guard let uid = Auth.auth().currentUser?.uid else {return}        
+        Firestore.fetchUserWithUID(uid: uid) { (user) in
+            Firestore.fetchPostsByUser(user: user
+                , completion: { (posts) in
+                    self.posts = posts
+                    self.collectionView.reloadData()
             })
-            self.collectionView.reloadData()
         }
     }
 }
