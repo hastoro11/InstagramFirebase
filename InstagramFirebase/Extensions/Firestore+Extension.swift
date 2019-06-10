@@ -35,6 +35,23 @@ extension Firestore {
             completion(posts)
         }
     }
+    
+    static func fetchUsers(completion: @escaping ([User]) -> Void) {
+        Firestore.firestore().collection("users").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching users:", error.localizedDescription)
+                return
+            }
+            guard let documents = snapshot?.documents else {return}
+            var users = documents.map({ (doc) -> User in
+                return User(of: doc.documentID, from: doc.data())
+            })
+            users.sort(by: { (lh, rh) -> Bool in
+                return lh.username.lowercased() < rh.username.lowercased()
+            })
+            completion(users)
+        }
+    }
 }
 
 

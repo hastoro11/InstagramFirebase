@@ -10,6 +10,14 @@ import UIKit
 
 class SearchCell: UITableViewCell {
     
+    var user: User? {
+        didSet {
+            guard let user = user else {return}
+            profileImageView.loadImage(from: user.profileImageURL)
+            usernameLabel.text = user.username
+        }
+    }
+    
     var profileImageView: UIImageView = {
        let iv = UIImageView()
         iv.backgroundColor = .orange
@@ -22,7 +30,6 @@ class SearchCell: UITableViewCell {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "username"
-        lbl.backgroundColor = .gray
         return lbl
     }()
     
