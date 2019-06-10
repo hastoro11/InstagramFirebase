@@ -18,17 +18,20 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     var user: User?
     var posts = [Post]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         // Register cell classes
         self.collectionView!.register(UserProfileCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(UINib(nibName: "UserProfileHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(logoutButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .black
         fetchUser()
         fetchPosts()
     }
     
-    @IBAction func logoutButtonTapped() {
+    @objc func logoutButtonTapped() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             do {
