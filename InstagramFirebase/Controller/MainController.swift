@@ -33,7 +33,7 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
         homeController.tabBarItem.selectedImage = UIImage(named: "home_selected")
         
         //search
-        let searchController = UITableViewController()
+        let searchController = SearchController()
         searchController.tabBarItem.image = UIImage(named: "search_unselected")
         searchController.tabBarItem.selectedImage = UIImage(named: "search_selected")
         

@@ -24,6 +24,8 @@
 		8C10751922AD14DF00A4BF7B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751822AD14DF00A4BF7B /* HomeController.swift */; };
 		8C10751B22AD161A00A4BF7B /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751A22AD161A00A4BF7B /* HomePostCell.swift */; };
 		8C10751D22AE401E00A4BF7B /* Firestore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751C22AE401E00A4BF7B /* Firestore+Extension.swift */; };
+		8C10752022AE93A600A4BF7B /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751F22AE93A600A4BF7B /* SearchController.swift */; };
+		8C10752222AE949900A4BF7B /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10752122AE949900A4BF7B /* SearchCell.swift */; };
 		8CCF054022A535DD00FA3E22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */; };
 		8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */; };
 		8CCF054522A535DD00FA3E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CCF054322A535DD00FA3E22 /* Main.storyboard */; };
@@ -52,6 +54,8 @@
 		8C10751822AD14DF00A4BF7B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		8C10751A22AD161A00A4BF7B /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		8C10751C22AE401E00A4BF7B /* Firestore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Extension.swift"; sourceTree = "<group>"; };
+		8C10751F22AE93A600A4BF7B /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		8C10752122AE949900A4BF7B /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		8CCF053C22A535DD00FA3E22 /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 				8C10750A22AB8B3F00A4BF7B /* PhotoSelectorCell.swift */,
 				8C10751022ABEE9900A4BF7B /* UserProfileCell.swift */,
 				8C10751A22AD161A00A4BF7B /* HomePostCell.swift */,
+				8C10752122AE949900A4BF7B /* SearchCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,6 +136,14 @@
 				8C10751822AD14DF00A4BF7B /* HomeController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		8C10751E22AE939300A4BF7B /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8C10751F22AE93A600A4BF7B /* SearchController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		8CCF053322A535DD00FA3E22 = {
@@ -176,6 +189,7 @@
 				8C10750522A96C6D00A4BF7B /* MainController.swift */,
 				8CCF055422A55B6700FA3E22 /* Login */,
 				8C10751722AD14C900A4BF7B /* Home */,
+				8C10751E22AE939300A4BF7B /* Search */,
 				8C10750722AAC71800A4BF7B /* Photo */,
 				8C1074F422A81C2700A4BF7B /* Profile */,
 			);
@@ -371,7 +385,9 @@
 				8C10751422ABFD0F00A4BF7B /* CustomImageView.swift in Sources */,
 				8C10751922AD14DF00A4BF7B /* HomeController.swift in Sources */,
 				8C1074FE22A8F25200A4BF7B /* UserProfileHeader.swift in Sources */,
+				8C10752222AE949900A4BF7B /* SearchCell.swift in Sources */,
 				8C10751D22AE401E00A4BF7B /* Firestore+Extension.swift in Sources */,
+				8C10752022AE93A600A4BF7B /* SearchController.swift in Sources */,
 				8C10750D22ABA85700A4BF7B /* SharePhotoController.swift in Sources */,
 				8C10751622ACE8AD00A4BF7B /* UIImageView+Extension.swift in Sources */,
 				8C10750622A96C6D00A4BF7B /* MainController.swift in Sources */,
