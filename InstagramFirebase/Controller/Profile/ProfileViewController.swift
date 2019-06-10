@@ -17,7 +17,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     //MARK: - vars
     var user: User?
     var posts = [Post]()
-    
+    var userId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(logoutButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .black
         fetchUser()
-        fetchPosts()
+//        fetchPosts()
     }
     
     @objc func logoutButtonTapped() {
@@ -89,11 +89,17 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     //MARK: - fucns
     fileprivate func fetchUser() {
         let currentUser = Auth.auth().currentUser
-        guard let uid = currentUser?.uid else {return}
+        let uid = userId ?? currentUser?.uid ?? ""
         Firestore.fetchUserWithUID(uid: uid) { (user) in
             self.user = user
             self.navigationItem.title = user.username
-            self.collectionView.reloadData()
+            Firestore.fetchUserWithUID(uid: uid) { (user) in
+                Firestore.fetchPostsByUser(user: user
+                    , completion: { (posts) in
+                        self.posts = posts
+                        self.collectionView.reloadData()
+                })
+            }
         }        
     }
     

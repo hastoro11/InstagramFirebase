@@ -23,12 +23,11 @@ class SearchController: UITableViewController, UISearchResultsUpdating {
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         searcController.searchResultsUpdater = self
+        navigationController?.navigationBar.tintColor = .black
         navigationItem.searchController = searcController
         searcController.searchBar.tintColor = .black
         fetchUsers()
     }
-    
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredUsers.count
@@ -55,12 +54,16 @@ class SearchController: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let profileController = ProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        profileController.userId = filteredUsers[indexPath.row].uid
+        navigationController?.pushViewController(profileController, animated: true)
     }
     
     func fetchUsers() {
         Firestore.fetchUsers { (users) in
-            self.users = users
-            self.filteredUsers = users
+            guard let uid = Auth.auth().currentUser?.uid else {return}
+            self.users = users.filter({$0.uid != uid})
+            self.filteredUsers = self.users
             self.tableView.reloadData()
         }
     }
