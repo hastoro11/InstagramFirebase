@@ -40,13 +40,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     fileprivate func fetchPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}        
-        Firestore.fetchUserWithUID(uid: uid) { (user) in
-            Firestore.fetchPostsByUser(user: user
-                , completion: { (posts) in
-                    self.posts = posts
-                    self.collectionView.reloadData()
+        Firestore.fetchFollowing { (userIds) in
+            userIds.forEach({ (userId) in
+                Firestore.fetchUserWithUID(uid: userId) { (user) in
+                    Firestore.fetchPostsByUser(user: user
+                        , completion: { (posts) in
+                            self.posts += posts
+                            self.posts.sort(by: { $0.creationDate > $1.creationDate})
+                            self.collectionView.reloadData()
+                    })
+                }
             })
         }
+        
     }
 }

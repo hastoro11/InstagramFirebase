@@ -93,6 +93,19 @@ extension Firestore {
         }
         
     }
+    
+    static func fetchFollowing(completion: @escaping ([String]) -> Void) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        Firestore.firestore().collection("following").document(currentUserId).collection("following").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching following:", error.localizedDescription)
+                return
+            }
+            guard let documents = snapshot?.documents else {return}
+            let users = documents.map({$0.documentID })
+            completion(users)
+        }
+    }
 }
 
 
