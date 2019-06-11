@@ -52,6 +52,47 @@ extension Firestore {
             completion(users)
         }
     }
+    
+    static func followUser(userId: String, completion: @escaping(Bool) -> Void) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        Firestore.firestore()
+            .collection("following").document(currentUserId)
+            .collection("following").document(userId).setData([userId : 1], completion: { (error) in
+            if let error = error {
+                print("Error setting following:", error.localizedDescription)
+                return
+            }
+            completion(true)
+        })
+    }
+    
+    static func unFollowUser(userId: String, completion: @escaping (Bool) -> Void) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        Firestore.firestore()
+            .collection("following").document(currentUserId)
+            .collection("following").document(userId).delete(completion: { (error) in
+            if let error = error {
+                print("Error setting unfollowing:", error.localizedDescription)
+                return
+            }
+            completion(true)
+        })
+    }
+    
+    static func isUserFollowed(userId: String, completion: @escaping (Bool) -> Void) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        Firestore.firestore()
+            .collection("following").document(currentUserId)
+            .collection("following").document(userId).getDocument { (result, error) in
+                if let error = error {
+                    print("Error requesting following:", error.localizedDescription)
+                    return
+                }
+                guard let result = result else {return}
+                completion(result.exists)
+        }
+        
+    }
 }
 
 

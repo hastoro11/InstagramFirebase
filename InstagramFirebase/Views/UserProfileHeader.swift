@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UserProfileHeader: UICollectionReusableView {
     
@@ -58,11 +59,58 @@ class UserProfileHeader: UICollectionReusableView {
     }
     
     fileprivate func configureButton() {
-        editProfileButton.setTitle("Edit Profile", for: .normal)
+        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        guard let userId = user?.uid else {return}
+        if userId == currentUserId {
+            editProfileButton.setTitle("Edit Profile", for: .normal)
+            editProfileButton.backgroundColor = .white
+            editProfileButton.setTitleColor(.black, for: .normal)
+            editProfileButton.addTarget(self, action: #selector(editProfileHandler), for: .touchUpInside)
+        } else {
+            Firestore.isUserFollowed(userId: userId) { (result) in
+                if result {
+                    self.configureUnFollowButton()
+                } else {
+                    self.configureFollowButton()
+                }
+            }            
+        }
         editProfileButton.layer.cornerRadius = 5
         editProfileButton.layer.masksToBounds = true
         editProfileButton.layer.borderColor = UIColor.lightGray.cgColor
         editProfileButton.layer.borderWidth = 0.5
+    }
+    
+    fileprivate func configureFollowButton() {
+        editProfileButton.setTitle("Follow", for: .normal)
+        editProfileButton.backgroundColor = kLOGINBUTTON_COLOR
+        editProfileButton.setTitleColor(.white, for: .normal)
+        editProfileButton.addTarget(self, action: #selector(followHandler), for: .touchUpInside)
+    }
+    
+    fileprivate func configureUnFollowButton() {
+        editProfileButton.setTitle("Unfollow", for: .normal)
+        editProfileButton.backgroundColor = .white
+        editProfileButton.setTitleColor(.black, for: .normal)
+        editProfileButton.addTarget(self, action: #selector(unFollowHandler), for: .touchUpInside)
+    }
+    
+    @objc func editProfileHandler() {
+        print("edit profile")
+    }
+    
+    @objc func followHandler() {
+        guard let user = user else {return}
+        Firestore.followUser(userId: user.uid) { (_) in
+            self.configureUnFollowButton()
+        }
+    }
+    
+    @objc func unFollowHandler() {
+        guard let user = user else {return}
+        Firestore.unFollowUser(userId: user.uid) { (_) in
+            self.configureFollowButton()
+        }
     }
     
     fileprivate func configureLabels() {
