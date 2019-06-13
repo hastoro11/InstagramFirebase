@@ -12,15 +12,22 @@ import Firebase
 private let reuseIdentifier = "datacell"
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    //MARK: - vars
+    var posts = [Post]()
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         navigationItem.titleView = UIImageView(image: UIImage(named: "logo2"))
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
         fetchPosts()
     }
     
-    var posts = [Post]()
+    //MARK: - CollectionView
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
@@ -39,14 +46,24 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return cell
     }
     
+    //MARK: - funcs
+    @objc func refresh() {
+        fetchPosts()
+    }
+    
     fileprivate func fetchPosts() {
-        Firestore.fetchFollowing { (userIds) in
+        guard let currentUserId = Auth.auth().currentUser?.uid else {return}
+        posts = []
+        Firestore.fetchFollowing { (fetchedUserIds) in
+            var userIds = fetchedUserIds
+            userIds.append(currentUserId)
             userIds.forEach({ (userId) in
                 Firestore.fetchUserWithUID(uid: userId) { (user) in
                     Firestore.fetchPostsByUser(user: user
                         , completion: { (posts) in
                             self.posts += posts
                             self.posts.sort(by: { $0.creationDate > $1.creationDate})
+                            self.collectionView.refreshControl?.endRefreshing()
                             self.collectionView.reloadData()
                     })
                 }

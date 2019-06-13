@@ -93,6 +93,10 @@ class HomePostCell: UICollectionViewCell {
         setupViews()
     }
     
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
+    
     fileprivate func setupViews() {
         addSubview(imageView)
         addSubview(profileImageView)
