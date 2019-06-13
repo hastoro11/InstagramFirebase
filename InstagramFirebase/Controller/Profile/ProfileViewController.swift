@@ -21,6 +21,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: kNEW_POST_NOTIFICATION, object: nil)
         collectionView.backgroundColor = .white
         // Register cell classes
         self.collectionView!.register(UserProfileCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -87,6 +88,10 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     //MARK: - fucns
+    @objc func handleNotification() {
+        fetchPosts()
+    }
+    
     fileprivate func fetchUser() {
         let currentUser = Auth.auth().currentUser
         let uid = userId ?? currentUser?.uid ?? ""

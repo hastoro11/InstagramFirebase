@@ -11,6 +11,7 @@ import Firebase
 
 class SharePhotoController: UIViewController {
     
+    //MARK: - vars
     var selectedImage: UIImage? {
         didSet {
             photoImageView.image = selectedImage
@@ -32,6 +33,7 @@ class SharePhotoController: UIViewController {
         return tv
     }()
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9086388946, green: 0.9097819328, blue: 0.9098058939, alpha: 1)
@@ -39,6 +41,7 @@ class SharePhotoController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(handleShare))
     }
     
+    //MARK: - funcs
     @objc func handleShare() {
         guard let currentUser = Auth.auth().currentUser else {return}
         guard let caption = captionTextView.text, !caption.isEmpty else {return}
@@ -67,10 +70,11 @@ class SharePhotoController: UIViewController {
                         print("Error saving post:", error.localizedDescription)
                         return
                     }
-                    guard let mainController = self.view.window?.rootViewController as? MainController else {return}
-                    guard let navController = mainController.viewControllers?[4] as? UINavigationController else {return}
-                    guard let profileController = navController.topViewController as? ProfileViewController else {return}
-                    profileController.fetchPosts()
+                    NotificationCenter.default.post(name: kNEW_POST_NOTIFICATION, object: nil)
+//                    guard let mainController = self.view.window?.rootViewController as? MainController else {return}
+//                    guard let navController = mainController.viewControllers?[4] as? UINavigationController else {return}
+//                    guard let profileController = navController.topViewController as? ProfileViewController else {return}
+//                    profileController.fetchPosts()
                     self.dismiss(animated: true, completion: nil)
                 })
                 

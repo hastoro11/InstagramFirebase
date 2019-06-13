@@ -19,6 +19,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: kNEW_POST_NOTIFICATION, object: nil)
         collectionView.backgroundColor = .white
         collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         navigationItem.titleView = UIImageView(image: UIImage(named: "logo2"))
@@ -48,6 +49,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     //MARK: - funcs
     @objc func refresh() {
+        fetchPosts()
+    }
+    
+    @objc func handleNotification() {
         fetchPosts()
     }
     
