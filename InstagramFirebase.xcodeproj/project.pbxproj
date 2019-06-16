@@ -26,6 +26,8 @@
 		8C10751D22AE401E00A4BF7B /* Firestore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751C22AE401E00A4BF7B /* Firestore+Extension.swift */; };
 		8C10752022AE93A600A4BF7B /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10751F22AE93A600A4BF7B /* SearchController.swift */; };
 		8C10752222AE949900A4BF7B /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10752122AE949900A4BF7B /* SearchCell.swift */; };
+		8C132FBB22B60F7B000A754B /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C132FBA22B60F7B000A754B /* CameraController.swift */; };
+		8C132FBD22B61DDA000A754B /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C132FBC22B61DDA000A754B /* PreviewController.swift */; };
 		8CCF054022A535DD00FA3E22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */; };
 		8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */; };
 		8CCF054522A535DD00FA3E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CCF054322A535DD00FA3E22 /* Main.storyboard */; };
@@ -56,6 +58,8 @@
 		8C10751C22AE401E00A4BF7B /* Firestore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Extension.swift"; sourceTree = "<group>"; };
 		8C10751F22AE93A600A4BF7B /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		8C10752122AE949900A4BF7B /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		8C132FBA22B60F7B000A754B /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		8C132FBC22B61DDA000A754B /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
 		8CCF053C22A535DD00FA3E22 /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				8C10751822AD14DF00A4BF7B /* HomeController.swift */,
+				8C132FBA22B60F7B000A754B /* CameraController.swift */,
+				8C132FBC22B61DDA000A754B /* PreviewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -381,7 +387,9 @@
 				8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */,
 				8CCF055722A563E200FA3E22 /* LoginButton.swift in Sources */,
 				8C10750F22ABED4200A4BF7B /* Post.swift in Sources */,
+				8C132FBB22B60F7B000A754B /* CameraController.swift in Sources */,
 				8C1074F322A81C2300A4BF7B /* ProfileViewController.swift in Sources */,
+				8C132FBD22B61DDA000A754B /* PreviewController.swift in Sources */,
 				8C10751422ABFD0F00A4BF7B /* CustomImageView.swift in Sources */,
 				8C10751922AD14DF00A4BF7B /* HomeController.swift in Sources */,
 				8C1074FE22A8F25200A4BF7B /* UserProfileHeader.swift in Sources */,

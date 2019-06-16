@@ -23,6 +23,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.backgroundColor = .white
         collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         navigationItem.titleView = UIImageView(image: UIImage(named: "logo2"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "camera3"
+        ), style: .plain, target: self, action: #selector(handlePhotoButton))
         collectionView.refreshControl = UIRefreshControl()
         collectionView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
         fetchPosts()
@@ -50,6 +52,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     //MARK: - funcs
+    @objc func handlePhotoButton() {
+        let cameraController = CameraController()
+        present(cameraController, animated: true, completion: nil)
+    }
+    
     @objc func refresh() {
         fetchPosts()
     }
