@@ -28,6 +28,7 @@
 		8C10752222AE949900A4BF7B /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10752122AE949900A4BF7B /* SearchCell.swift */; };
 		8C132FBB22B60F7B000A754B /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C132FBA22B60F7B000A754B /* CameraController.swift */; };
 		8C132FBD22B61DDA000A754B /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C132FBC22B61DDA000A754B /* PreviewController.swift */; };
+		8C132FC322B9267F000A754B /* CameraControllerTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C132FC222B9267F000A754B /* CameraControllerTransition.swift */; };
 		8CCF054022A535DD00FA3E22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */; };
 		8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */; };
 		8CCF054522A535DD00FA3E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CCF054322A535DD00FA3E22 /* Main.storyboard */; };
@@ -60,6 +61,7 @@
 		8C10752122AE949900A4BF7B /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		8C132FBA22B60F7B000A754B /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		8C132FBC22B61DDA000A754B /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		8C132FC222B9267F000A754B /* CameraControllerTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControllerTransition.swift; sourceTree = "<group>"; };
 		8CCF053C22A535DD00FA3E22 /* InstagramFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCF053F22A535DD00FA3E22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CCF054122A535DD00FA3E22 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				8C10751822AD14DF00A4BF7B /* HomeController.swift */,
 				8C132FBA22B60F7B000A754B /* CameraController.swift */,
 				8C132FBC22B61DDA000A754B /* PreviewController.swift */,
+				8C132FC222B9267F000A754B /* CameraControllerTransition.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				8CCF054222A535DD00FA3E22 /* RegisterViewController.swift in Sources */,
 				8CCF055722A563E200FA3E22 /* LoginButton.swift in Sources */,
 				8C10750F22ABED4200A4BF7B /* Post.swift in Sources */,
+				8C132FC322B9267F000A754B /* CameraControllerTransition.swift in Sources */,
 				8C132FBB22B60F7B000A754B /* CameraController.swift in Sources */,
 				8C1074F322A81C2300A4BF7B /* ProfileViewController.swift in Sources */,
 				8C132FBD22B61DDA000A754B /* PreviewController.swift in Sources */,

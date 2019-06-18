@@ -36,7 +36,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
-        
+        transitioningDelegate = self
         configure()
         setupViews()
     }
@@ -143,5 +143,18 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         let previewController = PreviewController()
         previewController.photoImageView.image = image
         present(previewController, animated: true, completion: nil)
+    }
+}
+
+
+extension CameraController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CameraControllerTransition()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let cameraControllerTransition = CameraControllerTransition()
+        cameraControllerTransition.presenting = false
+        return cameraControllerTransition
     }
 }
