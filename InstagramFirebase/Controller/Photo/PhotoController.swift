@@ -52,7 +52,7 @@ class PhotoController: UICollectionViewController, UICollectionViewDelegateFlowL
                         self.selectedIndex = count
                     }
                     
-                    if count == result.count - 1 {
+                    if count == 30 { // if count == result.count - 1
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
                         }
