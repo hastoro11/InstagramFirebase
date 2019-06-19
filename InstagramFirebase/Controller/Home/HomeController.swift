@@ -45,6 +45,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomePostCell
+        cell.delegate = self
         if indexPath.item < posts.count {
             cell.post = posts[indexPath.item]
         }
@@ -84,5 +85,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             })
         }
         
+    }
+}
+
+extension HomeController: HomePostCellDelegate {
+    func commentButtonDidTap(post: Post) {
+        let commentController = CommentController()
+        commentController.post = post
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.pushViewController(commentController, animated: true)
     }
 }

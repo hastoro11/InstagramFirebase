@@ -30,7 +30,9 @@ extension Firestore {
             }
             guard let documents = snapshot?.documents else {return}
             let posts = documents.map({ (doc) -> Post in
-                return Post(user: user, from: doc.data())
+                var post = Post(user: user, from: doc.data())
+                post.uid = doc.documentID
+                return post
             })
             completion(posts)
         }
@@ -104,6 +106,17 @@ extension Firestore {
             guard let documents = snapshot?.documents else {return}
             let users = documents.map({$0.documentID })
             completion(users)
+        }
+    }
+    
+    static func insertComment(postId: String, userId: String, text: String, completion: @escaping (Bool) -> Void) {
+        let values = ["uid": userId, "text": text, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        Firestore.firestore().collection("comments").document(postId).collection("comments").addDocument(data: values) { (error) in
+            if let error = error {
+                print("Error in comment:", error.localizedDescription)
+                return
+            }
+            completion(true)
         }
     }
 }
