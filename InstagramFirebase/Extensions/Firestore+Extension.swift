@@ -119,6 +119,18 @@ extension Firestore {
             completion(true)
         }
     }
+    
+    static func fetchCommentsForPostId(postId: String, completion: @escaping([Comment]) -> Void) {
+        Firestore.firestore().collection("comments").document(postId).collection("comments").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching comments:", error.localizedDescription)
+                return
+            }
+            guard let docs = snapshot?.documents.map({$0.data()}) else {return}
+            let comments = docs.map({Comment(from: $0)})
+            completion(comments)
+        }
+    }
 }
 
 
