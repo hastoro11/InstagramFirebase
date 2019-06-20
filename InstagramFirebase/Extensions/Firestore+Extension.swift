@@ -30,7 +30,7 @@ extension Firestore {
             }
             guard let documents = snapshot?.documents else {return}
             let posts = documents.map({ (doc) -> Post in
-                var post = Post(user: user, from: doc.data())
+                var post = Post(user: user, from: doc.data())               
                 post.uid = doc.documentID
                 return post
             })
@@ -129,6 +129,17 @@ extension Firestore {
             guard let docs = snapshot?.documents.map({$0.data()}) else {return}
             let comments = docs.map({Comment(from: $0)})
             completion(comments)
+        }
+    }
+    
+    static func likePostByUser(userId: String, postId: String, isLiked: Bool, completion: @escaping (Bool) -> Void) {
+        let values = [userId: isLiked ? 0 : 1] as [String: Any]
+        Firestore.firestore().collection("likes").document(postId).collection("likes").document(userId).setData(values) { (error) in
+            if let error = error {
+                print("Error setting like:", error.localizedDescription)
+                return
+            }
+            completion(true)
         }
     }
 }

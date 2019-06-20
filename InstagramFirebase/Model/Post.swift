@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct Post {
+class Post {
     var uid: String?
     var imageURL: String
     var creationDate: Date
     var user: User
     var caption: String
+    var isLiked = false
     
     init(user: User, from dictionary: [String: Any]) {
         self.user = user

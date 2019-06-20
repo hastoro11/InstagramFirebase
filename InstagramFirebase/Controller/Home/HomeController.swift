@@ -79,7 +79,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                             self.posts += posts
                             self.posts.sort(by: { $0.creationDate > $1.creationDate})
                             self.collectionView.refreshControl?.endRefreshing()
-                            self.collectionView.reloadData()
+                            posts.forEach({ (post) in
+                                Firestore.firestore().collection("likes").document(post.uid!).collection("likes").document(user.uid).getDocument(completion: { (snapshot, error) in
+                                    if let likedDict = snapshot?.data(), let isLiked = likedDict[user.uid] as? Int {
+                                        post.isLiked = isLiked == 1 ? true : false
+                                    }
+                                    self.collectionView.reloadData()
+                                })
+                                
+                                
+                            })
+                            
                     })
                 }
             })
@@ -94,5 +104,19 @@ extension HomeController: HomePostCellDelegate {
         commentController.post = post
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.pushViewController(commentController, animated: true)
+    }
+    
+    func likeButtonDidTap(for cell: HomePostCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else {return}
+        guard let userId = Auth.auth().currentUser?.uid else {return}
+        var post = posts[indexPath.item]
+        guard let postId = post.uid else {return}
+        
+        Firestore.likePostByUser(userId: userId, postId: postId, isLiked: post.isLiked) { (_) in
+            post.isLiked = !post.isLiked
+            self.posts[indexPath.item] = post
+            self.collectionView.reloadData()
+        }
+        
     }
 }

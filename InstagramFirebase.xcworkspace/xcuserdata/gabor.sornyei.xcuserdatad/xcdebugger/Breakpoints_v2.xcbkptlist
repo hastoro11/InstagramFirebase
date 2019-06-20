@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InstagramFirebase/Controller/Home/CommentController.swift"
-            timestampString = "582653449.157553"
+            filePath = "InstagramFirebase/Controller/Home/HomeController.swift"
+            timestampString = "582742592.124867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "tableView(_:heightForRowAt:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "fetchPosts()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InstagramFirebase/Controller/Home/CommentController.swift"
-            timestampString = "582653449.157935"
+            filePath = "InstagramFirebase/Controller/Home/HomeController.swift"
+            timestampString = "582742592.1252789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "tableView(_:heightForRowAt:)"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "fetchPosts()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
