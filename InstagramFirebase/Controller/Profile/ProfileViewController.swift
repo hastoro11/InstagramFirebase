@@ -9,15 +9,17 @@
 import UIKit
 import Firebase
 
-private let reuseIdentifier = "datacell"
+private let reuseIdentifier = "gridcell"
 private let reuseHeaderIdentifier = "header"
+private let listReuseIdentifier = "listcell"
 
-class ProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ProfileViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate {
     
     //MARK: - vars
     var user: User?
     var posts = [Post]()
     var userId: String?
+    var isGrid = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         collectionView.backgroundColor = .white
         // Register cell classes
         self.collectionView!.register(UserProfileCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: listReuseIdentifier)
         self.collectionView.register(UINib(nibName: "UserProfileHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(logoutButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .black
@@ -54,18 +57,32 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserProfileCell
-        cell.post = posts[indexPath.item]
-        
-//        cell.identifier = posts[indexPath.item].imageURL
-        // Configure the cell
-        cell.configure()
-        return cell
+        if isGrid {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserProfileCell
+            cell.post = posts[indexPath.item]
+            
+            //        cell.identifier = posts[indexPath.item].imageURL
+            // Configure the cell
+            cell.configure()
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listReuseIdentifier, for: indexPath) as! HomePostCell
+            cell.post = posts[indexPath.item]
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (view.frame.width - 2) / 3
-        return CGSize(width: width, height: width)
+        if isGrid {
+            let width = (view.frame.width - 2) / 3
+            return CGSize(width: width, height: width)
+        } else {
+            var height = view.frame.width
+            height += 8 + 40 + 8
+            height += 50
+            height += 80
+            return CGSize(width: view.frame.width, height: height)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -83,6 +100,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as! UserProfileHeader
         header.user = user
+        header.delegate = self
         header.configure()
         return header
     }
@@ -118,5 +136,15 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
                     self.collectionView.reloadData()
             })
         }        
+    }
+    
+    func gridViewButtonDidTap() {
+        isGrid = true
+        collectionView.reloadData()
+    }
+    
+    func listViewButtonDidTap() {
+        isGrid = false
+        collectionView.reloadData()
     }
 }

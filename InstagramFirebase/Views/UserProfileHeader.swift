@@ -9,6 +9,11 @@
 import UIKit
 import Firebase
 
+protocol UserProfileHeaderDelegate {
+    func listViewButtonDidTap()
+    func gridViewButtonDidTap()
+}
+
 class UserProfileHeader: UICollectionReusableView {
     
     //MARK: - outlets
@@ -44,8 +49,12 @@ class UserProfileHeader: UICollectionReusableView {
         }
     }
     
+    @IBOutlet weak var gridViewButton: UIButton!
+    @IBOutlet weak var listViewButton: UIButton!
+    
     //MARK: - vars
     var user: User?
+    var delegate: UserProfileHeaderDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -130,5 +139,17 @@ class UserProfileHeader: UICollectionReusableView {
     fileprivate func loadProfileImage() {
         guard let user = user else { return }        
         profileImageView.loadImage(from: user.profileImageURL)
+    }
+    
+    @IBAction func gridViewButtonTapped() {
+        gridViewButton.tintColor = UIColor.blue
+        listViewButton.tintColor = UIColor.lightGray
+        delegate?.gridViewButtonDidTap()
+    }
+    
+    @IBAction func listViewButtonTapped() {
+        listViewButton.tintColor = UIColor.blue
+        gridViewButton.tintColor = UIColor.lightGray
+        delegate?.listViewButtonDidTap()
     }
 }

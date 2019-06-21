@@ -78,11 +78,17 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pig-1M-nkE">
                             <rect key="frame" x="0.0" y="0.0" width="138" height="50"/>
                             <state key="normal" image="grid"/>
+                            <connections>
+                                <action selector="gridViewButtonTapped" destination="U6b-Vx-4bR" eventType="touchUpInside" id="o3w-D5-NV6"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnE-T1-j82">
                             <rect key="frame" x="138" y="0.0" width="138" height="50"/>
                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" image="list"/>
+                            <connections>
+                                <action selector="listViewButtonTapped" destination="U6b-Vx-4bR" eventType="touchUpInside" id="RcW-XE-nvL"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jy-Al-jjE">
                             <rect key="frame" x="276" y="0.0" width="138" height="50"/>
@@ -130,6 +136,8 @@
                 <outlet property="editProfileButton" destination="aeR-Kp-scO" id="WAf-gP-HJa"/>
                 <outlet property="followersLabel" destination="BHU-Bh-K6N" id="VnV-Dq-liP"/>
                 <outlet property="followingLabel" destination="yzm-nZ-fsz" id="KfV-zU-gFk"/>
+                <outlet property="gridViewButton" destination="pig-1M-nkE" id="SO0-Em-y8H"/>
+                <outlet property="listViewButton" destination="lnE-T1-j82" id="ofX-4f-DMR"/>
                 <outlet property="postsLabel" destination="4F8-Y2-flZ" id="3gv-m7-SCD"/>
                 <outlet property="profileImageView" destination="s17-xE-pCH" id="nEj-PY-JJ5"/>
                 <outlet property="usernameLabel" destination="fS4-O4-A68" id="QeV-Uh-YzD"/>
