@@ -20,11 +20,14 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     var posts = [Post]()
     var userId: String?
     var isGrid = true
+    var isPagingFinished = false
+    var lastSnapshot: DocumentSnapshot?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: kNEW_POST_NOTIFICATION, object: nil)
         collectionView.backgroundColor = .white
+        collectionView.alwaysBounceVertical = true
         // Register cell classes
         self.collectionView!.register(UserProfileCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: listReuseIdentifier)
@@ -32,7 +35,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(logoutButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .black
         fetchUser()
-//        fetchPosts()
+        //        fetchPosts()
     }
     
     @objc func logoutButtonTapped() {
@@ -49,14 +52,19 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
+    
     //MARK: - CollectionView
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return posts.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.item == posts.count - 1 && !isPagingFinished {
+            fetchPosts()
+        }
+        
         if isGrid {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserProfileCell
             cell.post = posts[indexPath.item]
@@ -96,7 +104,7 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 200)
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as! UserProfileHeader
         header.user = user
@@ -116,26 +124,45 @@ class ProfileViewController: UICollectionViewController, UICollectionViewDelegat
         Firestore.fetchUserWithUID(uid: uid) { (user) in
             self.user = user
             self.navigationItem.title = user.username
-            Firestore.fetchUserWithUID(uid: uid) { (user) in
-                Firestore.fetchPostsByUser(user: user
-                    , completion: { (posts) in
-                        self.posts = posts
-                        self.collectionView.reloadData()
-                })
-            }
+            self.fetchPosts()
         }        
     }
     
     func fetchPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
+        guard let user = self.user else {return}
         
-        Firestore.fetchUserWithUID(uid: uid) { (user) in
-            Firestore.fetchPostsByUser(user: user
-                , completion: { (posts) in
-                    self.posts = posts
-                    self.collectionView.reloadData()
+        let query: Query
+        if posts.count > 0 {
+            query = Firestore.firestore()
+                .collection("posts").document(user.uid)
+                .collection("user_posts")
+                .limit(to: 4)
+                .order(by: "creationDate", descending: true)
+                .start(after: [posts.last!.creationDate.timeIntervalSince1970])
+        } else {
+            query = Firestore.firestore()
+                .collection("posts").document(user.uid)
+                .collection("user_posts")
+                .order(by: "creationDate", descending: true)
+                .limit(to: 4)
+        }
+        
+        query.getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fteching posts:", error.localizedDescription)
+                return
+            }
+            guard let documents = snapshot?.documents else {return}
+            if documents.count < 4 {
+                self.isPagingFinished = true
+            }
+            documents.forEach({ (doc) in
+                let post = Post(user: user, from: doc.data())
+                post.uid = doc.documentID
+                self.posts.append(post)
             })
-        }        
+            self.collectionView.reloadData()
+        }
     }
     
     func gridViewButtonDidTap() {
